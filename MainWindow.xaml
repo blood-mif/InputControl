@@ -1,0 +1,343 @@
+﻿<Window x:Class="InputControl_9B925.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InputControl_9B925" xmlns:usercontrols="clr-namespace:InputControl_9B925.UserControls"
+        mc:Ignorable="d"
+        Title="Input Control"  
+        SizeToContent="WidthAndHeight"
+        MinWidth="900"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="2" />
+
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+    </Window.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="170"/>
+            <RowDefinition />
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <!--<Button Content="test" Grid.Row="3" Click="Button_Click"></Button>-->
+
+
+        <Menu Height="25" VerticalAlignment="Top" Grid.Row="0" >
+            <MenuItem Header="О программе">
+                <MenuItem Header="Информация" Command="{Binding CMDWindowInfo}"  />
+            </MenuItem>
+        </Menu>
+
+
+        <GroupBox Margin="50,0,50,0" Grid.Row="1" Header="Начальные данные"  VerticalAlignment="Top">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="Тип изделия"/>
+                <TextBox IsEnabled="False" Grid.Column="1"  Grid.Row="1"  Text="{Binding Path=ProductType}"/>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Номер изделия"/>
+                <TextBox Grid.Column="1"  Grid.Row="0"  Text="{Binding Path=ProductNumber,UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Margin" Value="2" />
+                            <Style.Triggers>
+                                <DataTrigger Value=""
+                                    Binding="{Binding Path=ProductNumber}">
+                                    <Setter Property="BorderBrush" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Дата"/>
+                <TextBox IsEnabled="False" Grid.Column="1"  Grid.Row="2"  Text="{Binding Path=NowData}" />
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Путь к папке с данными"/>
+                <TextBox IsEnabled="False" Grid.Column="1"  Grid.Row="3" Grid.ColumnSpan="4" Text="{Binding Path=PathFolder}" MaxWidth="600"/>
+
+
+                <TextBlock Grid.Column="3" Grid.Row="0" Text="Оператор (ФИО)"/>
+                <TextBox Grid.Column="4"  Grid.Row="0"  Text="{Binding Path=OperatorFIO,UpdateSourceTrigger=PropertyChanged}" >
+                    <TextBox.Style>
+                        <Style TargetType="{x:Type TextBox}">
+                            <Setter Property="Margin" Value="2" />
+                            <Style.Triggers>
+                                <DataTrigger Value=""
+                                    Binding="{Binding Path=OperatorFIO}">
+                                    <Setter Property="BorderBrush" Value="Red" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+                <TextBlock Grid.Column="3" Grid.Row="1" Text="Текущая широта (рад)"/>
+                <TextBox Grid.Column="4"  Grid.Row="1" Text="{Binding Path=Breadth}" MinWidth="160"/>
+                <Button Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="3" Content="Запуск проверки" Margin="2,5" Command="{Binding Path=CMDStartAbalyse}">
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Style.Triggers>
+                                <DataTrigger Value="false"
+                                     Binding="{Binding Path=FlagEnableButton}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </GroupBox>
+
+        <TabControl Grid.Row="2">
+            <TabControl.Style>
+                <Style TargetType="{x:Type TabControl}">
+                    <Style.Triggers>
+                        <DataTrigger Value="false" 
+                                         Binding="{Binding Path=FlagVisibleTabControl}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Value="true" 
+                                         Binding="{Binding Path=FlagVisibleTabControl}">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TabControl.Style>
+            <TabItem Header="Выдача навигационной информации" Visibility="Collapsed">
+
+            </TabItem>
+            <TabItem Header="Регламент" IsSelected ="True" >
+                <Grid >
+
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+
+                    <usercontrols:UserControlCheckingReports DataContext="{Binding Path=WMReglament}"   Grid.Row="0"  />
+                    <GroupBox Grid.Row="1" Header="Параметры регламента">
+                        
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=WMReglament}"    />
+                    </GroupBox>
+                    <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=WMReglament}"   Grid.Row="3"/>
+                    <usercontrols:UserControlReglament DataContext="{Binding Path=WMReglament}"  Grid.Row="2"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Режим Г1" >
+                <Grid >
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <usercontrols:UserControlCheckingReports DataContext="{Binding Path=VMErrCal51}"   Grid.Row="0"  />
+                    <GroupBox Grid.Row="1" Header="Параметры Г1">
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal51}"  />
+                    </GroupBox>
+                    <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=VMErrCal51}" Grid.Row="2" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Режим Г3">
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400"/>
+                        <ColumnDefinition Width="430"/>
+                    </Grid.ColumnDefinitions>
+                    <usercontrols:UserControlCheckingReports DataContext="{Binding Path=VMErrCal61}"   Grid.Row="0" Grid.ColumnSpan="2"/>
+                    <!--<GroupBox Header="Параметры Г3" Grid.Row="1" Grid.ColumnSpan="2">
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61}"  />
+                    </GroupBox>-->
+                    <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=VMErrCal61}" Grid.Row="2" Grid.Column="1"/>
+                    <StackPanel Grid.Row="2" Grid.Column="0">
+                        <GroupBox Header="Параметры Г3">
+                            <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61}"/>
+                        </GroupBox>
+                        <GroupBox Header="Область 1">
+                        <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61_0}"/>
+                        </GroupBox>
+                        <GroupBox Header="Область 2">
+                        <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61_1}"/>
+                        </GroupBox>
+                        <GroupBox Header="Область 3">
+                            <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61_2}"/>
+                        </GroupBox>
+                        <GroupBox Header="Область 4">
+                            <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61_3}"/>
+                        </GroupBox>
+                        <GroupBox Header="Область 5">
+                            <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61_4}"/>
+                        </GroupBox>
+                        <GroupBox Header="Область 6">
+                            <usercontrols:UserControlShortAzimut DataContext="{Binding Path=VMErrCal61_5}"/>
+                        </GroupBox>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Выставка" Visibility="Collapsed">
+                <Grid >
+
+
+                    <!--<Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>-->
+                    <!--<usercontrols:UserControlCheckingReports DataContext="{Binding Path=VMErrCal61}"   Grid.Row="0" />
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61}" Grid.Row="1"/>
+                    <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=VMErrCal61}" Grid.Row="2" />-->
+                    <StackPanel >
+                        <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61_0}" Grid.Row="0"/>
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61_1}" Grid.Row="0"/>
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61_2}" Grid.Row="0"/>
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61_3}" Grid.Row="0"/>
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61_4}" Grid.Row="0"/>
+                    <usercontrols:UserControlInitialExhibitionCorners DataContext="{Binding Path=VMErrCal61_5}" Grid.Row="0"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Чтение паспортных констант">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <usercontrols:UserControlCheckingReports DataContext="{Binding Path=VMPassportConst}"   Grid.Row="0" Grid.ColumnSpan="2" />
+                    <usercontrols:UserControlPassportConst DataContext="{Binding Path=VMPassportConst}"   Grid.Row="1" Grid.ColumnSpan="2" />
+                    <!--<usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=VMPassportConst}" Grid.Row="2" Grid.ColumnSpan="2" />-->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Прекращение режима" Visibility="Hidden">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="70"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <usercontrols:UserControlCheckingReports DataContext="{Binding Path=VMStatusSR}"  Grid.Row="0" />
+                    <usercontrols:UserControlStatusStepReg DataContext="{Binding Path=VMStatusSR}"  Grid.Row="1" />
+                    <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=VMStatusSR}"  Grid.Row="4" />
+                </Grid>
+            </TabItem>
+            <TabItem Header=" Установка типа измерений" Visibility="Hidden">
+
+                <TabControl>
+                    <TabItem Header="Тип 1">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <usercontrols:UserControlCheckingReports DataContext="{Binding Path=WMsettMT1}"  Grid.Row="0"  />
+                            <usercontrols:UserControlSettingMeasurementType DataContext="{Binding Path=WMsettMT1}"   Grid.Row="1"/>
+                            <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=WMsettMT1}"  Grid.Row="2"  />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Тип 2">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <usercontrols:UserControlCheckingReports DataContext="{Binding Path=WMsettMT2}"  Grid.Row="0"  />
+                            <usercontrols:UserControlSettingMeasurementType DataContext="{Binding Path=WMsettMT2}"   Grid.Row="1"/>
+                            <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=WMsettMT2}"  Grid.Row="2"  />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Тип 3">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <usercontrols:UserControlCheckingReports DataContext="{Binding Path=WMsettMT3}"  Grid.Row="0"  />
+                            <usercontrols:UserControlSettingMeasurementType DataContext="{Binding Path=WMsettMT3}"   Grid.Row="1"/>
+                            <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=WMsettMT3}"  Grid.Row="2"  />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Тип 4">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition Height="2*"/>
+                            </Grid.RowDefinitions>
+                            <usercontrols:UserControlCheckingReports DataContext="{Binding Path=WMsettMT4}"  Grid.Row="0"  />
+                            <usercontrols:UserControlSettingMeasurementType DataContext="{Binding Path=WMsettMT4}"   Grid.Row="1"/>
+                            <usercontrols:UserControlTableRefusalAndMessage DataContext="{Binding Path=WMsettMT4}"  Grid.Row="2"  />
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+
+            </TabItem>
+
+        </TabControl>
+        <!--<Button Grid.Row="4" Content="Сохранение файла" Margin="50,10,24,0" Height="25" Width="213" HorizontalAlignment="Left" Command=""/>-->
+        <WrapPanel Grid.Row="4" Margin="0,10,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button MinWidth="213" Height="25" Content="Сохранить протокол" Command="{Binding Path=CMDSaveReport}">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Style.Triggers>
+                            <DataTrigger Value="false" 
+                                         Binding="{Binding Path=FlagVisibleTabControl}">
+                                <Setter Property="IsEnabled" Value="False" />
+                            </DataTrigger>
+                            <DataTrigger Value="true" 
+                                         Binding="{Binding Path=FlagVisibleTabControl}">
+                                <Setter Property="IsEnabled" Value="True" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!--<Button MinWidth="213" Margin="25,0" Content="Просмотр файла"/>-->
+        </WrapPanel>
+
+    </Grid>
+</Window>

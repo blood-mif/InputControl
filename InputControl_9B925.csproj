@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39CC4F75-2FEB-4E70-AB93-CEF05E5402FA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>InputControl_9B925</RootNamespace>
+    <AssemblyName>InputControl_9B925</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=5.0.0.0, Culture=neutral, PublicKeyToken=66aa232afad40158, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ookii.Dialogs.Wpf.5.0.1\lib\net462\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Analyse\BaseAnalyse.cs" />
+    <Compile Include="Commands\CommandAnalyseCalibration.cs" />
+    <Compile Include="Commands\CommandSaveFile.cs" />
+    <Compile Include="Commands\CommandWindowInfo.cs" />
+    <Compile Include="Model\SendPuckP1.cs" />
+    <Compile Include="Report\ReportModel.cs" />
+    <Compile Include="Report\VMReportImputControl.cs" />
+    <Compile Include="UserControls\ErrorsCalibration.xaml.cs">
+      <DependentUpon>ErrorsCalibration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlCalibration.xaml.cs">
+      <DependentUpon>UserControlCalibration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlCheckingReports.xaml.cs">
+      <DependentUpon>UserControlCheckingReports.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlErrors.xaml.cs">
+      <DependentUpon>UserControlErrors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlInitialExhibitionCorners.xaml.cs">
+      <DependentUpon>UserControlInitialExhibitionCorners.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlPassportConst.xaml.cs">
+      <DependentUpon>UserControlPassportConst.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlReglament.xaml.cs">
+      <DependentUpon>UserControlReglament.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlSettingMeasurementType.xaml.cs">
+      <DependentUpon>UserControlSettingMeasurementType.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlShortAzimut.xaml.cs">
+      <DependentUpon>UserControlShortAzimut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlStatusStepReg.xaml.cs">
+      <DependentUpon>UserControlStatusStepReg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlTableRefusalAndMessage.xaml.cs">
+      <DependentUpon>UserControlTableRefusalAndMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\ViewModelErrorsCalibration.cs" />
+    <Compile Include="ViewModel\ViewModelMain.cs" />
+    <Compile Include="ViewModel\ViewModelPassportConst.cs" />
+    <Compile Include="ViewModel\ViewModelReglament.cs" />
+    <Compile Include="ViewModel\ViewModelSettingMeasurementType.cs" />
+    <Compile Include="ViewModel\ViewModelStatusStopReg.cs" />
+    <Compile Include="WindowInfo.xaml.cs">
+      <DependentUpon>WindowInfo.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="UserControls\ErrorsCalibration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlCalibration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlCheckingReports.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlErrors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlInitialExhibitionCorners.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlPassportConst.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlReglament.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlSettingMeasurementType.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlShortAzimut.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlStatusStepReg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UserControlTableRefusalAndMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Mathem\Matrix\Matrix.csproj">
+      <Project>{6a7e4b93-93fc-420b-bf6c-e506f8b2d365}</Project>
+      <Name>Matrix</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\SaveInstruments\WriteXpsDocument\WriteXpsDocument.csproj">
+      <Project>{4568f0e3-312e-45eb-9065-5bcd7e8a88a6}</Project>
+      <Name>WriteXpsDocument</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\StrData\StrData.csproj">
+      <Project>{65dc7227-92bd-405b-a985-2c75ea26cb98}</Project>
+      <Name>StrData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\UserControls\PpdControls\PpdControls.csproj">
+      <Project>{e262fbf2-418b-408b-80ea-2fa1e3e041f7}</Project>
+      <Name>PpdControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Logo.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

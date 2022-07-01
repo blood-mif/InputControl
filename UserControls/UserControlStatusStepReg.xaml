@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="InputControl_9B925.UserControls.UserControlStatusStepReg"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InputControl_9B925.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="20" d:DesignWidth="150">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Текущий режим остановлен" Grid.Column="1"/>
+        <TextBox Text="{Binding Path=StatusStopReg}" Grid.Column="2">
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="IsReadOnly" Value="True"/>
+
+                    <Setter Property="Background" Value="White" />
+                    <Setter Property="BorderBrush" Value="Green" />
+                    <Style.Triggers>
+                        <DataTrigger Value="X"
+                            Binding="{Binding Text, RelativeSource={RelativeSource Self}}">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="BorderBrush" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="InputControl_9B925.UserControls.UserControlErrors"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InputControl_9B925.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,5,10,5" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="IsReadOnly" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Value="Error"
+                    Binding="{Binding Text, RelativeSource={RelativeSource Self}}">
+                    <Setter Property="BorderBrush" Value="Red" />
+                </DataTrigger>
+                <DataTrigger Value="Correct"
+                    Binding="{Binding Text, RelativeSource={RelativeSource Self}}">
+                    <Setter Property="BorderBrush" Value="Green" />
+                    <Setter Property="Text" Value="LOL" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Margin" Value="10,15,0,0" />
+        </Style>
+    </UserControl.Resources>
+    <Border BorderBrush="Gray" BorderThickness="1">
+        <Grid Background="White" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+
+
+            <TextBlock Grid.Row="1" Grid.Column="4" Text="ErrorKs"/>
+            <TextBox Grid.Row="1" Grid.Column="5" Text="{Binding Path=ErrorKs}"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="ErrorCyclogramm"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=ErrorCyclogramm}"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="ErrorLg"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path=ErrorLg}"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="ErrorAx"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=ErrorAx}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="ErrorTdLg"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path=ErrorTdLg}"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="4" Text="ErrorTdAx"/>
+            <TextBox Grid.Row="2" Grid.Column="5" Text="{Binding Path=ErrorTdAx}"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="ErrorBopi"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Path=ErrorBopi}"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="ErrorKren"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Path=ErrorKren}"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="ErrorOverVibration"/>
+            <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Path=ErrorOverVibration}"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="ErrorG"/>
+            <TextBox Grid.Row="3" Grid.Column="3" Text="{Binding Path=ErrorG}"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="4" Text="ProcessReg"/>
+            <TextBox Grid.Row="3" Grid.Column="5" Text="{Binding Path=ProcessReg}"/>
+
+            <TextBlock Grid.Row="0" Grid.Column="4" Text="DataNotUpdate"/>
+            <TextBox Grid.Row="0" Grid.Column="5" Text="{Binding Path=DataNotUpdate}"/>
+
+
+        </Grid>
+    </Border>
+</UserControl>
